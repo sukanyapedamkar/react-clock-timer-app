@@ -1,25 +1,37 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Clock from './Clock';
 import './App.css';
 
 class App extends Component {
+  
+  	constructor(props){
+  		super(props);
+  		this.state = {
+  			deadline: 'December 25,2019',
+  			newDeadline: ''
+  		}
+  	}
+
+  	changeDeadline(){
+      this.setState({deadline:this.state.newDeadline})
+  	}
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <div className="App-title">
+        	Countdown to {this.state.deadline}
+        </div>
+        <Clock 
+          deadline={this.state.deadline}
+        />
+        <input  
+          placeholder='new date' 
+          onChange={event => this.setState({newDeadline: event.target.value})} 
+        />
+        <button onClick={() => this.changeDeadline()}>
+        	Submit
+        </button>
       </div>
     );
   }
